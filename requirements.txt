@@ -1,0 +1,3 @@
+pyenchant
+python-crontab
+yagmail

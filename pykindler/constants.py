@@ -6,4 +6,4 @@ metadata_command =lambda x: ['fetch-ebook-metadata','--opf','--title', x]
 downloads_dir = get_downloads_folder_location()
 temp_metadata_file =  path.join(downloads_dir,"temp_metadata_storage.opf")
 processed_dir = path.join(downloads_dir,'Processed_Books')
-converted_dir = path.join(downloads_dir,'Converted_Books')
+convert_dir = path.join(downloads_dir,'Converted_Books')

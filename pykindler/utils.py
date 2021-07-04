@@ -4,7 +4,16 @@ def check_option_args_validity(dwd,email,file):
     return None #TODO
     
 def setup_cron_job():
-    return #TODO
+    from subprocess import call
+    # call(['chmod','+x','cli.py'])
+    from crontab import CronTab
+    cron = CronTab(user=True)
+    existing_jobs = [str(l) for l in cron.find_command('')]
+    #TODO: Search and clean out existing jobs 
+    job = cron.new(command='TO_BE_FILLED') #TODO: Fill with a call
+    job.hour.every(12)
+    # cron.write() 
+
 
 # Finds your downloads location
 def get_downloads_folder_location():

@@ -14,6 +14,7 @@ pip3 install pykindler
 
 ## Dependencies
 - UNIX based system needed (Linux, MacOS)
+- Calibre
 - [pyenchant - Offers an English Dictionary, helpful in detecting if a file is a book](https://pypi.org/project/pyenchant/)
 - [python-crontab - Allows scheduling of pykindler jobs that auto-convert and email your books in the background](https://pypi.org/project/python-crontab/)
 - [pgi - Auto-detects your downloads folder](https://pypi.org/project/pgi/)

@@ -37,6 +37,10 @@ pykindler-run -d /home/some-user/Desktop -c Y
 ```sh
 pykindler-run -f /home/some-user/Desktop/my-book.epub
 ```
+- If you just want to not convert to mobi, choose your own extension with -x
+```sh
+pykindler-run -f /home/some-user/Desktop/my-book.mobi -x epub
+```
 
 - For more help
 ```sh

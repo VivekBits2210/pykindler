@@ -6,7 +6,7 @@ The source code is currently hosted on GitHub at:
 https://github.com/VivekBits2210/pykindler
 
 Binary installers for the latest released version are available at the [Python
-Package Index (PyPI)] (<insert_package_name_here>)
+Package Index (PyPI)] (https://pypi.org/project/pykindler/)
 
 ```sh
 pip3 install pykindler

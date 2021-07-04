@@ -11,13 +11,14 @@ from os import listdir, path
 
 def main():
     argv = sys.argv[1:]
-    usage = "pykindler [-d <custom_download_folder>] [-f <absolute_file_path_to_convert>] [-e <kindle_email_id>] [-c Y (if you want a daily conversion job for the specified downloads folder)]"
+    usage = "pykindler [-d <custom_download_folder>] [-f <absolute_file_path_to_convert>] [-e <kindle_email_id>] [-x <custom_extension (defaults to mobi)>] [-c Y (if you want a daily conversion job for the specified downloads folder)]"
     try:
-        opts, args = getopt.getopt(argv, "hd:f:e:c:")
+        opts, args = getopt.getopt(argv, "hd:f:e:c:x:")
     except getopt.GetoptError:
         print(f"Usage: {usage}")
         sys.exit(2)
     dwd = email = file = None
+    extension = "mobi"
     cron = False
     for opt, arg in opts:
         if opt == "-h":
@@ -31,7 +32,9 @@ def main():
             email = arg
         elif opt == "-c" and arg == "Y":
             cron = True
-    msg = check_option_args_validity(dwd, email, file)
+        elif opt == "-x":
+            extension = arg
+    msg = check_option_args_validity(dwd, email, file, extension)
     if msg is not None:
         print(msg)
         sys.exit(2)
@@ -48,6 +51,6 @@ def main():
         if file is not None:
             file_list = [path.basename(file)]
             download_dir = path.split(file)[0]
-        process_and_convert_books(file_list, download_dir)
+        process_and_convert_books(file_list, download_dir, extension)
         print("Exiting...")
         sys.exit()

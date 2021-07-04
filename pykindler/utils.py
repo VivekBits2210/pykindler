@@ -1,7 +1,8 @@
 from os import path, makedirs
+from .constants import valid_extensions_for_conversion
 
 
-def check_option_args_validity(dwd, email, file):
+def check_option_args_validity(dwd, email, file, extension):
     import re
 
     is_dir = path.isdir(dwd) if dwd is not None else True
@@ -12,6 +13,7 @@ def check_option_args_validity(dwd, email, file):
         else True
     )
     is_file = path.isfile(file) if file is not None else True
+    is_extension = True if "." + extension in valid_extensions_for_conversion else False
 
     if not is_dir:
         return f"Error: {dwd} is not an existing directory!"
@@ -19,6 +21,8 @@ def check_option_args_validity(dwd, email, file):
         return f"Error: {email} is not a valid Kindle e-mail address!"
     if not is_file:
         return f"Error: {file} does not exist or is not a valid file!"
+    if not is_extension:
+        return f"Error: Converting to {extension} is not available, choose from {valid_extensions_for_conversion}"
 
     return None
 

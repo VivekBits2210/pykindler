@@ -3,7 +3,7 @@ Command line tool that automatically detects and converts downloaded e-books to 
 
 ## Work Left
 ### Critical
-- **Fix SMTP calls**: Commented out the e-mailing code for now, would be sweet to fix the auto-email-to-Kindle feature
+- **Fix SMTP calls**: Commented out the e-mailing code for now, would be sweet to have a working auto-email-to-Kindle feature
 ### Testing
 - **CI/CD pipeline**: Automating testing and releases
 - **Coverage**: Add a code coverage tool

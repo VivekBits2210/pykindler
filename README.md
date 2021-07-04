@@ -5,8 +5,7 @@ Command line tool that automatically detects and converts downloaded e-books to 
 The source code is currently hosted on GitHub at:
 https://github.com/VivekBits2210/pykindler
 
-Binary installers for the latest released version are available at the [Python
-Package Index (PyPI)](https://pypi.org/project/pykindler/)
+Package is deployed at [Python Package Index (PyPI)](https://pypi.org/project/pykindler/)
 
 ```sh
 pip3 install pykindler
@@ -49,4 +48,5 @@ For usage questions, the best place to go to is [StackOverflow](https://stackove
 ## Contributing to pykindler
 
 All contributions, bug reports, bug fixes, documentation improvements, enhancements, and ideas are welcome.
+Here is what I [plan to do next](PLAN.md) 
 Please feel free to mail ideas to the maintainer: [viveknayak2210@gmail.com]

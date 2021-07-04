@@ -4,7 +4,7 @@ from .constants import *
 from .utils import clean_file_name, make_required_directories
 
 
-def process_and_convert_books(file_list, downloads_dir):
+def process_and_convert_books(file_list, downloads_dir, ext):
     not_books_file = path.join(downloads_dir, "not_books.txt")
     temp_metadata_file = path.join(downloads_dir, "temp_metadata_storage.opf")
     processed_dir = path.join(downloads_dir, "Processed_Books")
@@ -65,7 +65,8 @@ def process_and_convert_books(file_list, downloads_dir):
                         "ebook-convert",
                         absolute_file_path,
                         path.join(
-                            convert_dir, filename[: filename.rfind(".")] + ".mobi"
+                            convert_dir,
+                            filename[: filename.rfind(".")] + "." + ext,
                         ),
                     ]
                 )

@@ -23,8 +23,8 @@ def process_and_convert_books(file_list, downloads_dir, ext):
     for filename in file_list:
         absolute_file_path = path.join(downloads_dir, filename)
 
-        # Move mobi files as is
-        if filename.endswith(".mobi"):
+        # Move specified extension files as is
+        if filename.endswith("." + ext):
             rename(absolute_file_path, path.join(convert_dir, filename))
             continue
 

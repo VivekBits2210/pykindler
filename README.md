@@ -11,7 +11,7 @@ Package is deployed at [Python Package Index (PyPI)](https://pypi.org/project/py
 pip3 install pykindler
 ```
 
-Make sure to install Calibre first ([Guide](https://calibre-ebook.com/download_linux))
+Ensure Calibre is installed ([Guide](https://calibre-ebook.com/download_linux))
 ```sh
 sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
 ```

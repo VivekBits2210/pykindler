@@ -53,8 +53,11 @@ def clean_file_name(filename):
     return clean_name, extension
 
 def make_required_directories(dir_list):
+    print(dir_list)
     for directory in dir_list:
+        print(director)
         if not path.exists(directory):
+            print('Here?')
             makedirs(directory)
 
 def email_book(files, send_to):

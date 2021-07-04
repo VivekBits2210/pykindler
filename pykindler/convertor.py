@@ -1,9 +1,15 @@
 from os import path, rename, remove
 from subprocess import check_output, CalledProcessError, run
 from .constants import *
-from .utils import clean_file_name
+from .utils import clean_file_name, make_required_directories
 
-def process_and_convert_books(file_list):
+def process_and_convert_books(file_list,downloads_dir):
+    not_books_file = path.join(downloads_dir, "not_books.txt")
+    temp_metadata_file = path.join(downloads_dir,"temp_metadata_storage.opf")
+    processed_dir = path.join(downloads_dir,'Processed_Books')
+    convert_dir = path.join(downloads_dir,'Converted_Books')
+    make_required_directories([convert_dir,processed_dir])
+
     print(f"Processing on folder: {downloads_dir}")
 
     # Fetch cache of items confirmed to not be books
@@ -15,7 +21,7 @@ def process_and_convert_books(file_list):
 
     for filename in file_list:
         absolute_file_path = path.join(downloads_dir, filename)
-
+    
         # Move mobi files as is
         if filename.endswith('.mobi'):
             rename(absolute_file_path, path.join(convert_dir, filename))
@@ -23,6 +29,10 @@ def process_and_convert_books(file_list):
             
         # If we looked at this file on last run, ignore
         if filename in not_book_list:
+            continue
+
+        # Ignore hidden files
+        if filename.startswith('.'):
             continue
 
         # Don't convert files which are too big
@@ -49,7 +59,7 @@ def process_and_convert_books(file_list):
                               absolute_file_path,
                               path.join(convert_dir, filename[:filename.rfind('.')]+'.mobi')
                              ])
-                rename(absolute_file_path, path.join(downloads_dir,'Processed_Books',filename))
+                rename(absolute_file_path, path.join(processed_dir,filename))
                 print(f"Completed Conversion: {filename}")
             except CalledProcessError: 
                 print('Not a book!')

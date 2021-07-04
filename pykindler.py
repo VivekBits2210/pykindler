@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import sys, getopt
-from pykindler.utils import check_option_args_validity, setup_cron_job
-from pykindler.constants import *
+from pykindler.utils import check_option_args_validity, setup_cron_job, get_downloads_folder_location
 from pykindler.convertor import process_and_convert_books
 from os import listdir
 def main(argv):
@@ -31,11 +30,11 @@ def main(argv):
       print(usage)
       sys.exit(2)
    else:
-      configure_file_locations(dwd)
       if cron is True:
          setup_cron_job()
-      file_list = listdir(downloads_dir) if file is None else [file]
-      process_and_convert_books(file_list)
+      download_dir = get_downloads_folder_location() if dwd is None else dwd
+      file_list = listdir(download_dir) if file is None else [file]
+      process_and_convert_books(file_list, download_dir)
       print('Exiting...')
       sys.exit()
 if __name__ == "__main__":

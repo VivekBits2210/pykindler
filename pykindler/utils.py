@@ -13,7 +13,11 @@ def check_option_args_validity(dwd, email, file, extension):
         else True
     )
     is_file = path.isfile(file) if file is not None else True
-    is_extension = True if "." + extension in valid_extensions_for_conversion else False
+    is_extension = (
+        False
+        if extension is not None and extension not in valid_extensions_for_conversion
+        else True
+    )
 
     if not is_dir:
         return f"Error: {dwd} is not an existing directory!"
@@ -22,7 +26,7 @@ def check_option_args_validity(dwd, email, file, extension):
     if not is_file:
         return f"Error: {file} does not exist or is not a valid file!"
     if not is_extension:
-        return f"Error: Converting to {extension} is not available, choose from {valid_extensions_for_conversion}"
+        return f"Error: {extension} extension not present in {valid_extensions_for_conversion}"
 
     return None
 

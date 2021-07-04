@@ -4,12 +4,25 @@ from .constants import *
 from .utils import clean_file_name
 
 def process_and_convert_books(file_list):
+    print(f"Processing on folder: {downloads_dir}")
+
+    # Fetch cache of items confirmed to not be books
+    try:
+        not_book_list = open(not_books_file, "r").read().splitlines()
+    except FileNotFoundError:
+        not_book_list = []
+    not_book_writer = open(not_books_file, "a")
+
     for filename in file_list:
         absolute_file_path = path.join(downloads_dir, filename)
 
         # Move mobi files as is
         if filename.endswith('.mobi'):
             rename(absolute_file_path, path.join(convert_dir, filename))
+            continue
+            
+        # If we looked at this file on last run, ignore
+        if filename in not_book_list:
             continue
 
         # Don't convert files which are too big
@@ -36,12 +49,17 @@ def process_and_convert_books(file_list):
                               absolute_file_path,
                               path.join(convert_dir, filename[:filename.rfind('.')]+'.mobi')
                              ])
-                rename(absolute_file_path, path.join(processed_dir,filename))
+                rename(absolute_file_path, path.join(downloads_dir,'Processed_Books',filename))
                 print(f"Completed Conversion: {filename}")
             except CalledProcessError: 
-                #Does not have metadata, therefore not a book, continue to next
+                print('Not a book!')
+                #Does not have metadata, therefore not a book, cache name and continue to next
+                not_book_writer.write(filename+'\n')
                 continue
 
     # Cleanup
     if path.exists(temp_metadata_file):
         remove(temp_metadata_file)
+    not_book_writer.close()
+
+    print(f'Finished processing folder: {downloads_dir}')

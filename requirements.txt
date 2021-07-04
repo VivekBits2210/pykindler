@@ -1,3 +1,2 @@
 pyenchant
 python-crontab
-yagmail

@@ -1,5 +1,20 @@
 from os import path, makedirs
-from .constants import converted_dir
+
+def check_option_args_validity(dwd,email,file):
+    return None #TODO
+    
+def setup_cron_job():
+    from subprocess import call
+    # call(['chmod','+x','cli.py'])
+    from crontab import CronTab
+    cron = CronTab(user=True)
+    existing_jobs = [str(l) for l in cron.find_command('')]
+    #TODO: Search and clean out existing jobs 
+    job = cron.new(command='TO_BE_FILLED') #TODO: Fill with a call
+    job.hour.every(12)
+    # cron.write() 
+
+
 # Finds your downloads location
 def get_downloads_folder_location():
     try: #GTK2
@@ -43,6 +58,7 @@ def make_required_directories(dir_list):
             makedirs(directory)
 
 def email_book(files, send_to):
+    pass
     # TODO: Make this fn work
     # import smtplib
     # from pathlib import Path

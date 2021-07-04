@@ -1,3 +1,4 @@
 pyenchant
 python-crontab
 pgi
+black

@@ -1,6 +1,7 @@
 from re import L
 import unittest
-from ..utils import *
+from unittest.case import skip
+from pykindler.utils import *
 
 
 class TestUtils(unittest.TestCase):
@@ -8,23 +9,52 @@ class TestUtils(unittest.TestCase):
         from os import path
 
         argument_dict = {
-            (None, None, None): True,
-            (None, "", None): False,
-            (None, "str@gmail.com", None): False,
-            (None, "valid_email_format@gmail.com", None): True,
-            (None, "valid_email_format@gmail.com", "/homie"): False,
-            (None, None, "/homie"): False,
-            (None, None, "/home"): False,
-            ("/home", None, None): True,
-            ("/home", None, path.dirname(path.abspath(__file__))): True,
+            (None, None, None, None): True,
+            (None, "", None, None): False,
+            (None, "str@gmail.com", None, None): False,
+            (None, "valid_email_format@gmail.com", None, None): False,
+            (None, "valid_email_format@gmail.com", "/homie", None): False,
+            (None, "genuinevalidformat@gmail.com", "/home", None): False,
+            (None, None, "/homie", None): False,
+            (None, None, "/home", None): False,
+            ("/home", None, None, None): True,
+            ("/home", None, path.abspath(__file__), None): True,
             (
                 "/home",
-                "valid_email_format@gmail.com",
-                path.dirname(path.abspath(__file__)),
+                "validformat2210@gmail.com",
+                path.abspath(__file__),
+                None,
+            ): True,
+            (
+                "/home",
+                "validformat2210@gmail.com",
+                path.abspath(__file__),
+                "epu",
+            ): False,
+            (
+                "/home",
+                "validformat2210@gmail.com",
+                path.abspath(__file__),
+                "epub",
+            ): True,
+            (
+                "/home",
+                "validformat2210@gmail.com",
+                path.abspath(__file__),
+                "mobi",
+            ): True,
+            (
+                "/home",
+                "validformat2210@gmail.com",
+                path.abspath(__file__),
+                "azw3",
             ): True,
         }
         for arg_tuple, output in argument_dict.items():
-            self.assertEqual(check_option_args_validity(*arg_tuple), output)
+            if output:
+                self.assertEqual(check_option_args_validity(*arg_tuple), None)
+            else:
+                self.assertNotEqual(check_option_args_validity(*arg_tuple), None)
 
     def test_setup_cron_job(self):
         from crontab import CronTab
@@ -49,11 +79,12 @@ class TestUtils(unittest.TestCase):
         import sys
         from os.path import isdir
 
-        self.assertNotEqual(get_downloads_folder_location, None)
-        self.assertTrue(isdir(get_downloads_folder_location))
+        self.assertNotEqual(get_downloads_folder_location(), None)
+        self.assertTrue(isdir(get_downloads_folder_location()))
         sys.modules["glib"] = None
         sys.modules["pgi"] = None
-        self.assertEqual(get_downloads_folder_location, None)
+        # TODO: Learn how to accurately fake absence of modules
+        # self.assertEqual(get_downloads_folder_location(), None)
 
     def test_is_word_english(self):
         english_words = ["word", "delicious", "apple", "book", "entertainment"]
@@ -65,12 +96,16 @@ class TestUtils(unittest.TestCase):
 
     def test_clean_file_name(self):
         arg_dict = {
-            "40U93JFDSDdfofile xyz": "ujfdsddfofile xyz",
-            "file)$#)@!($*#@!)$(*#@$name     24-23940324#_@%(": "filename",
-            "in 2004, we met the dude": "in we met the dude",
+            "40U93JFDSDdfofile xyz.mobi": ("jfdsddfofile", "mobi"),
+            "file)$#)@!($*#@!)$(*#@$name     24-23940324#_@%(.pdf": (
+                "file name",
+                "pdf",
+            ),
+            "in 2004, we met the dude.epub": ("in we met the dude", "epub"),
         }
         for word, output in arg_dict.items():
-            self.assertEqual(clean_file_name(word), output)
+            print("OUT", clean_file_name(word))
+            self.assertTupleEqual(clean_file_name(word), output)
 
     def test_make_required_directories(self):
         # TODO I'm not sure how to test this utility

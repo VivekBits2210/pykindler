@@ -11,7 +11,14 @@ from os import listdir, path
 
 def main():
     argv = sys.argv[1:]
-    usage = "pykindler [-d <custom_download_folder>] [-f <absolute_file_path_to_convert>] [-e <kindle_email_id>] [-x <custom_extension (defaults to mobi)>] [-c Y (if you want a daily conversion job for the specified downloads folder)]"
+    usage = """
+    pykindler-run 
+    [-d <custom folder to run on (defaults to your downloads folder if you don't specify)>] 
+    [-f <absolute file path to convert, if you'd like just one file converted>] 
+    [-e <kindle email id>] 
+    [-x <custom extension to convert to (defualts to mobi if you don't specify)>] 
+    [-c Y (if you want a twice-a-day conversion job for the specified downloads folder)]
+    """
     try:
         opts, args = getopt.getopt(argv, "hd:f:e:c:x:")
     except getopt.GetoptError:

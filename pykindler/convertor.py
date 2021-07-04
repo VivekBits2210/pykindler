@@ -4,6 +4,8 @@ from .constants import *
 from .utils import clean_file_name
 
 def process_and_convert_books(file_list):
+    print(f"Processing on folder: {downloads_dir}")
+
     # Fetch cache of items confirmed to not be books
     try:
         not_book_list = open(not_books_file, "r").read().splitlines()
@@ -50,6 +52,7 @@ def process_and_convert_books(file_list):
                 rename(absolute_file_path, path.join(downloads_dir,'Processed_Books',filename))
                 print(f"Completed Conversion: {filename}")
             except CalledProcessError: 
+                print('Not a book!')
                 #Does not have metadata, therefore not a book, cache name and continue to next
                 not_book_writer.write(filename+'\n')
                 continue
@@ -58,4 +61,5 @@ def process_and_convert_books(file_list):
     if path.exists(temp_metadata_file):
         remove(temp_metadata_file)
     not_book_writer.close()
-    print('Finished running')
+
+    print(f'Finished processing folder: {downloads_dir}')

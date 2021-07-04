@@ -1,5 +1,11 @@
 from os import path, makedirs
-from .constants import converted_dir
+
+def check_option_args_validity(dwd,email,file):
+    return None #TODO
+    
+def setup_cron_job():
+    return #TODO
+
 # Finds your downloads location
 def get_downloads_folder_location():
     try: #GTK2
@@ -43,6 +49,7 @@ def make_required_directories(dir_list):
             makedirs(directory)
 
 def email_book(files, send_to):
+    pass
     # TODO: Make this fn work
     # import smtplib
     # from pathlib import Path

@@ -62,7 +62,7 @@ def process_and_convert_books(file_list,downloads_dir):
                 rename(absolute_file_path, path.join(processed_dir,filename))
                 print(f"Completed Conversion: {filename}")
             except CalledProcessError: 
-                print('Not a book!')
+                print(f"Not a book: {filename}")
                 #Does not have metadata, therefore not a book, cache name and continue to next
                 not_book_writer.write(filename+'\n')
                 continue

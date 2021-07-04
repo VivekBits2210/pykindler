@@ -1,18 +1,37 @@
 from os import path, makedirs
 
-def check_option_args_validity(dwd,email,file):
-    return None #TODO
+def check_option_args_validity(dwd, email, file):
+    import re
+    is_dir = path.isdir(dwd) if dwd is not None else True
+    is_email = False if email is not None and not re.match(r"^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$",email) else True
+    is_file = path.isfile(file) if file is not None else True
+
+    if not is_dir:
+        return f"Error: {dwd} is not an existing directory!"
+    if not is_email:
+        return f"Error: {email} is not a valid Kindle e-mail address!"
+    if not is_file:
+        return f"Error: {file} does not exist or is not a valid file!"
+
+    return None
     
-def setup_cron_job():
-    from subprocess import call
-    # call(['chmod','+x','cli.py'])
+def setup_cron_job(dwd):
+    print('Creating daily 12hr scheduled run for pykindler-run...')
     from crontab import CronTab
     cron = CronTab(user=True)
-    existing_jobs = [str(l) for l in cron.find_command('')]
-    #TODO: Search and clean out existing jobs 
-    job = cron.new(command='TO_BE_FILLED') #TODO: Fill with a call
+
+    # Clean if job exists
+    for job in cron:
+        if 'pykindler-run' in str(job):
+            cron.remove(job)
+            print(f'Cleaning out existing pykindler-run job: {str(job)}')
+
+    # Make new job
+    command = "pykindler-run" if dwd is None else f"pykindler-run -d {dwd}"
+    job = cron.new(command=command)
     job.hour.every(12)
-    # cron.write() 
+    cron.write()
+    print('Scheduled job created!')
 
 
 # Finds your downloads location
@@ -21,8 +40,11 @@ def get_downloads_folder_location():
         import glib
         downloads_dir = glib.get_user_special_dir(glib.USER_DIRECTORY_DOWNLOAD)
     except (ModuleNotFoundError, AttributeError) as e: #GTK3
-        from gi.repository import GLib
-        downloads_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
+        try:
+            from pgi.repository import GLib
+            downloads_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
+        except (ModuleNotFoundError, AttributeError) as e: #GTK3
+            downloads_dir = None
     return downloads_dir
 
 # Check if word is english

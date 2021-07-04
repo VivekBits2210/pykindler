@@ -57,5 +57,5 @@ For usage questions, the best place to go to is [StackOverflow](https://stackove
 ## Contributing to pykindler
 
 All contributions, bug reports, bug fixes, documentation improvements, enhancements, and ideas are welcome.
-Here is what I [plan to do next](PLAN.md) 
+Here is what I [plan to do next](https://docs.google.com/document/d/1ZjnNMVRCZE592LtXDs4G56BMRfQ9DBM9hKjtFrYV2w8/edit?usp=sharing) 
 Please feel free to mail ideas to the maintainer: [viveknayak2210@gmail.com]

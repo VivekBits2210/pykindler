@@ -16,6 +16,8 @@ Ensure Calibre is installed ([Guide](https://calibre-ebook.com/download_linux))
 sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
 ```
 
+Know your Kindle's e-mail address [here](https://www.amazon.com/gp/sendtokindle/email)
+
 ## Dependencies
 - UNIX based system needed (Linux, MacOS)
 - Calibre

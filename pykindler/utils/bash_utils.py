@@ -38,7 +38,7 @@ def get_commandline_args():
     return args
 
 
-def check_option_args_validity(args):
+def check_commandline_args(args):
     from ..constants import valid_extensions_for_conversion
     import re
 

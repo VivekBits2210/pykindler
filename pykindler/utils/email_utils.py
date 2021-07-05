@@ -37,6 +37,13 @@ def construct_message(sender_address, receiver_address):
     return message
 
 
+def is_file_attachable(abs_attachment_path):
+    from ..constants import gmail_attachment_threshold_mb
+
+    file_size_in_mb = path.getsize(abs_attachment_path) / 1e6
+    return file_size_in_mb < abs_attachment_path - 2
+
+
 def attach_file_to_message(message, abs_attachment_path):
     from email.mime.application import MIMEApplication
 

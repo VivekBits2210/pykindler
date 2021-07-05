@@ -2,7 +2,7 @@
 import sys
 from pykindler.utils.bash_utils import (
     get_commandline_args,
-    check_option_args_validity,
+    check_commandline_args,
     process_commandline_args,
 )
 from pykindler.utils.cron_utils import setup_cron_job
@@ -12,7 +12,7 @@ from os import path
 
 def client():
     args = get_commandline_args()
-    msg = check_option_args_validity(args)
+    msg = check_commandline_args(args)
     if msg is not None:
         print(msg)
         sys.exit(2)

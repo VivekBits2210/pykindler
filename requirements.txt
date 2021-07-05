@@ -3,3 +3,4 @@ python-crontab
 pgi
 black
 argparse
+keyring

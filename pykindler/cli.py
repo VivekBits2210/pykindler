@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 import sys
 import logging
-from pykindler.utils import (
-    check_option_args_validity,
-    setup_cron_job,
+from pykindler.bash_utils import (
     get_commandline_args,
+    check_option_args_validity,
     process_commandline_args,
 )
+from pykindler.cron_utils import setup_cron_job
 from pykindler.convertor import process_and_convert_books
 from os import path
 

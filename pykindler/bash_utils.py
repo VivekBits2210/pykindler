@@ -1,3 +1,6 @@
+from os import path, listdir
+
+
 def get_commandline_args():
     from argparse import ArgumentParser
 
@@ -31,6 +34,7 @@ def get_commandline_args():
 
 
 def check_option_args_validity(args):
+    from .constants import valid_extensions_for_conversion
     import re
 
     is_dir = path.isdir(args.folder) if args.folder is not None else True
@@ -60,7 +64,7 @@ def check_option_args_validity(args):
 
 
 def process_commandline_args(args):
-    from os import listdir
+    from .os_utils import get_downloads_folder_location
 
     if args.file is not None:
         file_list = [path.basename(args.file)]

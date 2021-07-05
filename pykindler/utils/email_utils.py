@@ -11,7 +11,20 @@ def get_smtp_session():
 
 
 def login_to_session(session, sender_address):
-    session.login(sender_address, get_password(sender_address))
+    from smtplib import SMTPAuthenticationError
+    from keyring import delete_password
+    from keyring.errors import PasswordDeleteError
+
+    try:
+        session.login(sender_address, get_password(sender_address))
+        return True
+    except SMTPAuthenticationError:
+        try:
+            print("Invalid credentials, deleting from keyring....")
+            delete_password("system", sender_address)
+        except PasswordDeleteError:
+            print("ERROR: Keyring corrupted!")
+    return False
 
 
 def get_password(sender_address):

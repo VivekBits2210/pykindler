@@ -18,6 +18,8 @@ def process_and_convert_books(file_list, folder, args):
     not_book_list = convert_file_to_list(not_books_file)
     not_book_writer = open(not_books_file, "a")
 
+    converted_files = []
+
     for filename in file_list:
         absolute_file_path = path.join(folder, filename)
 
@@ -25,11 +27,13 @@ def process_and_convert_books(file_list, folder, args):
             filename.endswith(extension) for extension in extension_list
         ):
             trigger_conversion(absolute_file_path, processed_dir, convert_dir, args.ext)
+            converted_files.append(absolute_file_path)
             continue
 
         # Move specified extension files as is
         if filename.endswith("." + args.ext):
             rename(absolute_file_path, path.join(convert_dir, filename))
+            converted_files.append(absolute_file_path)
             continue
 
         # If we looked at this file on last run, ignore
@@ -64,6 +68,7 @@ def process_and_convert_books(file_list, folder, args):
                 trigger_conversion(
                     absolute_file_path, processed_dir, convert_dir, args.ext
                 )
+                converted_files.append(absolute_file_path)
             except CalledProcessError:
                 print(f"Not a book: {filename}")
                 not_book_writer.write(filename + "\n")
@@ -75,3 +80,5 @@ def process_and_convert_books(file_list, folder, args):
     print(
         f"Finished processing folder: {folder}.\n Please check folders {processed_dir} and {convert_dir} for your books! "
     )
+
+    return convert_dir

@@ -11,7 +11,7 @@ from os import path
 
 
 def client():
-    args = get_commandline_args()
+    args = get_commandline_args(sys.argsv[1:])
     msg = check_commandline_args(args)
     if msg is not None:
         print(msg)

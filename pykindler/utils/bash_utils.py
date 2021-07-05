@@ -1,7 +1,7 @@
 from os import path, listdir
 
 
-def get_commandline_args():
+def get_commandline_args(args):
     from argparse import ArgumentParser
 
     parser = ArgumentParser()
@@ -34,7 +34,7 @@ def get_commandline_args():
         help="Convert without checking if it is a book or within safe size threshold (only extension check is performed)",
         action="store_true",
     )
-    args = parser.parse_args()
+    args = parser.parse_args(args)
     return args
 
 

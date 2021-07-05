@@ -12,7 +12,7 @@ from os import path
 
 
 def client():
-    args = get_commandline_args(sys.argsv[1:])
+    args = get_commandline_args(sys.argv[1:])
     error_message = check_commandline_args(args)
     if error_message is not None:
         print(error_message)

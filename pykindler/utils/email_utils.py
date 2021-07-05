@@ -2,13 +2,13 @@ from os import path
 import smtplib
 
 
-def send_a_bunch_of_files_to_kindle(file_list,from,to):
+def send_a_bunch_of_files_to_kindle(file_list, from_file, to_file):
     for abs_file_path in file_list:
         if not is_file_attachable(abs_file_path):
             print(f"Attachment too big: Skipping {abs_file_path}..")
             continue
 
-        GmailKindleClient(from,to, abs_file_path).send_email_with_book()
+        GmailKindleClient(from_file, to_file, abs_file_path).send_email_with_book()
 
 
 def is_file_attachable(self):

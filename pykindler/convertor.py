@@ -84,4 +84,4 @@ def process_and_convert_books(file_list, folder, args):
         f"Finished processing folder: {folder}.\n Please check folders {processed_dir} and {convert_dir} for your books! "
     )
 
-    return convert_dir
+    return converted_files

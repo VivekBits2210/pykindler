@@ -43,10 +43,9 @@ def check_commandline_args(args):
     import re
 
     is_dir = path.isdir(args.folder) if args.folder is not None else True
-    is_email = (
+    is_kindle = (
         False
-        if args.email is not None
-        and not re.match(r"^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$", args.email)
+        if args.kindle is not None and not args.kindle.endswith("@kindle.com")
         else True
     )
     is_file = path.isfile(args.file) if args.file is not None else True
@@ -58,8 +57,8 @@ def check_commandline_args(args):
 
     if not is_dir:
         return f"Error: {args.folder} is not an existing directory!"
-    if not is_email:
-        return f"Error: {args.email} is not a valid Kindle e-mail address!"
+    if not is_kindle:
+        return f"Error: {args.kindle} is not a valid Kindle e-mail address!"
     if not is_file:
         return f"Error: {args.file} does not exist or is not a valid file!"
     if not is_extension:

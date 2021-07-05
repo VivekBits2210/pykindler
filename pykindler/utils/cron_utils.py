@@ -14,11 +14,13 @@ def create_pykindler_cron_job(cron, args):
     command = command + f" --folder {args.folder}" if args.folder is not None else ""
     command = command + f" --email {args.email}" if args.email is not None else ""
     command = command + f" --ext {args.ext}" if args.ext is not None else ""
+    command = command + f" --email {args.email}" if args.email is not None else ""
+    command = command + f" --kindle {args.kindle}" if args.kindle is not None else ""
+    command = command + f" --force" if args.force else ""
     print(f"Creating scheduled job {command}...")
     job = cron.new(command=command)
     job.hour.every(12)
     cron.write()
-    print("Job created!")
 
 
 # Create the job, plus housekeeping

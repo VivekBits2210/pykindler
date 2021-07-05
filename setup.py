@@ -12,7 +12,7 @@ if path.isfile(requirementPath):
 setuptools.setup(
     name="pykindler",
     install_requires=install_requires,
-    version="0.1",
+    version="0.2",
     description="Schedules conversion of e-books to mobi, mails it to your kindle",
     long_description="Schedules conversion of e-books to mobi, mails it to your kindle (repo: https://github.com/VivekBits2210/pykindler)",
     entry_points={"console_scripts": ["pykindler-run=pykindler.cli:client"]},

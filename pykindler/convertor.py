@@ -1,5 +1,5 @@
 from os import path, rename
-from subprocess import CalledProcessError, run
+from subprocess import CalledProcessError, check_output
 from .constants import *
 from .utils.convert_utils import trigger_conversion
 from .utils.os_utils import (
@@ -26,14 +26,16 @@ def process_and_convert_books(file_list, folder, args):
         if args.force and True in set(
             filename.endswith(extension) for extension in extension_list
         ):
-            trigger_conversion(absolute_file_path, processed_dir, convert_dir, args.ext)
-            converted_files.append(absolute_file_path)
+            converted_file_path = trigger_conversion(
+                absolute_file_path, processed_dir, convert_dir, args.ext
+            )
+            converted_files.append(converted_file_path)
             continue
 
         # Move specified extension files as is
         if filename.endswith("." + args.ext):
             rename(absolute_file_path, path.join(convert_dir, filename))
-            converted_files.append(absolute_file_path)
+            converted_files.append(path.join(convert_dir, filename))
             continue
 
         # If we looked at this file on last run, ignore
@@ -64,11 +66,12 @@ def process_and_convert_books(file_list, folder, args):
 
             # Filter out non-books using calibre's metadata bash calls
             try:
-                run(metadata_command(cleaned_file_name), check=True)
-                trigger_conversion(
+                # run(metadata_command(cleaned_file_name), check=True)
+                check_output(metadata_command(cleaned_file_name))
+                converted_file_path = trigger_conversion(
                     absolute_file_path, processed_dir, convert_dir, args.ext
                 )
-                converted_files.append(absolute_file_path)
+                converted_files.append(converted_file_path)
             except CalledProcessError:
                 print(f"Not a book: {filename}")
                 not_book_writer.write(filename + "\n")

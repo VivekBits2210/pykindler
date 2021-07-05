@@ -22,6 +22,9 @@ sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | 
 - [pyenchant - Offers an English Dictionary, helpful in detecting if a file is a book](https://pypi.org/project/pyenchant/)
 - [python-crontab - Allows scheduling of pykindler jobs that auto-convert and email your books in the background](https://pypi.org/project/python-crontab/)
 - [pgi - Auto-detects your downloads folder](https://pypi.org/project/pgi/)
+- [black - Code formatter](https://pypi.org/project/black/)
+- [argparse - Neater interface with command line arguments](https://pypi.org/project/argparse/)
+- [keyring - Safe storage of email credentials](https://pypi.org/project/keyring/)
 
 ## Usage
 - In default mode, pykindler will auto-detect your downloads folder and populate 'Converted_Books' and 'Processed_Books' folders

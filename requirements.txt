@@ -2,3 +2,4 @@ pyenchant
 python-crontab
 pgi
 black
+argparse

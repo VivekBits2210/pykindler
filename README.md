@@ -30,16 +30,16 @@ pykindler-run
 ```
 - In custom mode, specify your downloads folder and setup a twice-a-day conversion job
 ```sh
-pykindler-run -d /home/some-user/Desktop -c Y
+pykindler-run --folder /home/some-user/Desktop --job
 ```
 
-- If you just want to convert one file, specify it after -f
+- If you just want to convert one file, specify it after --file
 ```sh
-pykindler-run -f /home/some-user/Desktop/my-book.epub
+pykindler-run --file /home/some-user/Desktop/my-book.epub
 ```
-- If you want to not convert to mobi, choose your own extension with -x
+- If you want to not convert to mobi, choose your own extension with --ext
 ```sh
-pykindler-run -f /home/some-user/Desktop/my-book.mobi -x epub
+pykindler-run --file /home/some-user/Desktop/my-book.mobi --ext epub
 ```
 
 - For more help

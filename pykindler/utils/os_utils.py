@@ -1,6 +1,6 @@
 # Finds your downloads location
 from os import makedirs, path
-from constants import file_appended_hash
+from ..constants import file_appended_hash
 
 
 def get_downloads_folder_location():

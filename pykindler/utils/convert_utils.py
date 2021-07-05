@@ -1,7 +1,4 @@
 from os import path
-import logging
-
-logger = logging.getLogger(__name__)
 
 
 def trigger_conversion(absolute_file_path, processed_dir, convert_dir, extension):
@@ -9,7 +6,7 @@ def trigger_conversion(absolute_file_path, processed_dir, convert_dir, extension
     from os import rename
 
     filename = path.basename(absolute_file_path)
-    logger.info(f"Beginning conversion: {filename}")
+    print(f"Beginning conversion: {filename}")
     check_output(
         [
             "ebook-convert",
@@ -21,4 +18,4 @@ def trigger_conversion(absolute_file_path, processed_dir, convert_dir, extension
         ]
     )
     rename(absolute_file_path, path.join(processed_dir, filename))
-    logger.info(f"Completed Conversion: {filename}")
+    print(f"Completed Conversion: {filename}")

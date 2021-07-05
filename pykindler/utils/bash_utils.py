@@ -26,7 +26,7 @@ def get_commandline_args():
     )
     parser.add_argument(
         "--job",
-        help="setups a twice-a-day conversion job for specified folder (or downloads)",
+        help="sets up a twice-a-day conversion job for specified folder (or downloads)",
         action="store_true",
     )
     parser.add_argument(

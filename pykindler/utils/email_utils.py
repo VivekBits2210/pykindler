@@ -1,7 +1,4 @@
 from os import path
-import logging
-
-logger = logging.getLogger(__name__)
 
 
 def get_smtp_session():
@@ -55,5 +52,5 @@ def send_mail(session, sender_address, receiver_address, message):
     text = message.as_string()
     session.sendmail(sender_address, receiver_address, text)
     # session.quit() #TODO: Quit session when it's called, not here
-    logger.info("Mail Sent")
+    print("Mail Sent")
     return session

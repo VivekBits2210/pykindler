@@ -51,8 +51,9 @@ def attach_file_to_message(message, abs_attachment_path):
     return message
 
 
-def send_message(session, sender_address, receiver_address, message):
+def send_mail(session, sender_address, receiver_address, message):
     text = message.as_string()
     session.sendmail(sender_address, receiver_address, text)
     # session.quit() #TODO: Quit session when it's called, not here
     logger.info("Mail Sent")
+    return session

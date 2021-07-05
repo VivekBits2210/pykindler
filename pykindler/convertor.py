@@ -1,9 +1,13 @@
 from os import path, rename
 from subprocess import CalledProcessError, run
 from .constants import *
-from .utils import trigger_conversion
-from .os_utils import make_required_inodes, name_required_inodes, convert_file_to_list
-from .nlp_utils import clean_file_name
+from .utils.convert_utils import trigger_conversion
+from .utils.os_utils import (
+    make_required_inodes,
+    name_required_inodes,
+    convert_file_to_list,
+)
+from .utils.nlp_utils import clean_file_name
 import logging
 
 logger = logging.getLogger(__name__)
@@ -72,5 +76,5 @@ def process_and_convert_books(file_list, folder, args):
     not_book_writer.close()
 
     logger.info(
-        f"Finished processing folder: {folder}.\n Please check folders {processed_dir} and Converted_Books_{convert_dir} for your books! "
+        f"Finished processing folder: {folder}.\n Please check folders {processed_dir} and {convert_dir} for your books! "
     )

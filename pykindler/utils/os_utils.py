@@ -30,9 +30,9 @@ def make_required_inodes(dir_list, file_list):
 
 
 def name_required_inodes(folder):
-    not_books_file = path.join(folder, "not_books_" + file_appended_hash + ".txt")
-    processed_dir = path.join(folder, "Processed_Books_" + file_appended_hash)
-    convert_dir = path.join(folder, "Converted_Books_" + file_appended_hash)
+    not_books_file = path.join(folder, f"not_books_{file_appended_hash}.txt")
+    processed_dir = path.join(folder, f"Processed_Books_{file_appended_hash}")
+    convert_dir = path.join(folder, f"Converted_Books_{file_appended_hash}")
     return not_books_file, processed_dir, convert_dir
 
 

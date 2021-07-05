@@ -14,7 +14,12 @@ def get_commandline_args():
         help="absolute file path for conversion, if you want a single file converted",
     )
     parser.add_argument(
-        "--email", help="your Kindle email-id, for auto-emailing after conversion"
+        "--kindle",
+        help="your Kindle email-id, books are auto-emailed to here after conversion",
+    )
+    parser.add_argument(
+        "--email",
+        help="your personal email-id, books are auto-emailed from here after conversion (use with --kindle for the first ever run, to store credentials)",
     )
     parser.add_argument(
         "--ext", help="extension to convert to (defaults to mobi if not specified)"
@@ -26,7 +31,7 @@ def get_commandline_args():
     )
     parser.add_argument(
         "--force",
-        help="Convert even if it's not a book",
+        help="Convert without checking if it is a book or within safe size threshold (only extension check is performed)",
         action="store_true",
     )
     args = parser.parse_args()
@@ -34,7 +39,7 @@ def get_commandline_args():
 
 
 def check_option_args_validity(args):
-    from .constants import valid_extensions_for_conversion
+    from ..constants import valid_extensions_for_conversion
     import re
 
     is_dir = path.isdir(args.folder) if args.folder is not None else True

@@ -4,8 +4,9 @@
 name: Upload Python Package
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+    - '*'
 
 jobs:
   deploy:
@@ -21,6 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install m2r
         pip install setuptools wheel twine
     - name: Build and publish
       env:

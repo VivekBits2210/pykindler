@@ -62,7 +62,7 @@ def is_file_attachable(abs_file_path):
 
 
 class GmailSession:
-    def __init__(self, sender):
+    def __init__(self, sender, askcred):
         from smtplib import SMTPAuthenticationError
         from keyring import delete_password
         from keyring.errors import PasswordDeleteError
@@ -72,7 +72,7 @@ class GmailSession:
         self.session.starttls()
 
         try:
-            passwd = self.get_password()
+            passwd = self.get_password(askcred)
             self.session.login(self.sender, self.get_password())
         except SMTPAuthenticationError:
             try:
@@ -82,12 +82,12 @@ class GmailSession:
                 print("ERROR: Keyring corrupted!")
             raise OSError
 
-    def get_password(self):
+    def get_password(self, askcred):
         import keyring
         from getpass import getpass
 
         password = keyring.get_password("system", self.sender)
-        if password is None:
+        if password is None or askcred is True:
             password = getpass(prompt=f"Enter e-mail password for {self.sender}: ")
             keyring.set_password("system", self.sender, password)
         return password

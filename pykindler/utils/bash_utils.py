@@ -34,6 +34,11 @@ def get_commandline_args(args):
         help="Convert without checking if it is a book or within safe size threshold (only extension check is performed)",
         action="store_true",
     )
+    parser.add_argument(
+        "--askcred",
+        help="Re-enter your email password, override the stored one",
+        action="store_true",
+    )
     args = parser.parse_args(args)
     return args
 

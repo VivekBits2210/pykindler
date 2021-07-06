@@ -34,7 +34,9 @@ def client():
         sys.exit(2)
 
     try:
-        session_object = GmailSession(args.email) if args.email is not None else None
+        session_object = (
+            GmailSession(args.email, args.askcred) if args.email is not None else None
+        )
         print("Credentials are valid! Books will be e-mailed after conversion...\n")
     except OSError:
         print("Error: Please enter valid e-mail credentials!")

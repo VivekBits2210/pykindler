@@ -27,7 +27,7 @@ else:
 setuptools.setup(
     name="pykindler",
     install_requires=install_requires,
-    version="0.2",
+    version="0.2.1",
     description=description,
     long_description=long_description,
     license="MIT",

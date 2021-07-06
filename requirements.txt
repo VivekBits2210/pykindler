@@ -17,3 +17,4 @@ SecretStorage==3.3.1
 six==1.16.0
 toml==0.10.2
 zipp==3.5.0
+m2r

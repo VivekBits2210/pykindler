@@ -41,6 +41,7 @@ class KindleEmailClient:
 
 
 def send_a_bunch_of_files_to_kindle(session_object, file_list, from_file, to_file):
+    emailed_book_list = []
     for abs_file_path in file_list:
         print(f"Attempting to e-mail {path.basename(abs_file_path)}")
         if not is_file_attachable(abs_file_path):
@@ -50,8 +51,10 @@ def send_a_bunch_of_files_to_kindle(session_object, file_list, from_file, to_fil
         KindleEmailClient(
             session_object.session, from_file, to_file, abs_file_path
         ).send_email_with_book()
+        emailed_book_list.append(abs_file_path)
 
     session_object.session.quit()
+    return emailed_book_list
 
 
 def is_file_attachable(abs_file_path):

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from pykindler.utils.os_utils import make_required_inodes
 import sys
 from pykindler.utils.bash_utils import (
     get_commandline_args,
@@ -8,7 +9,7 @@ from pykindler.utils.bash_utils import (
 from .utils.cron_utils import setup_cron_job
 from .utils.email_utils import *
 from .convertor import process_and_convert_books
-from os import path
+from os import path, rename
 
 
 def client():
@@ -45,9 +46,16 @@ def client():
     converted_file_list = process_and_convert_books(file_list, download_dir, args)
     if args.email is not None:
         print("\n Auto-emailing books to Kindle...")
-        send_a_bunch_of_files_to_kindle(
+        emailed_file_list = send_a_bunch_of_files_to_kindle(
             session_object, converted_file_list, args.email, args.kindle
         )
+        for file_path in emailed_file_list:
+            emailed_path_dir = path.join(path.split(file_path)[0], "Emailed_Books")
+            make_required_inodes([emailed_path_dir], [])
+            rename(
+                file_path,
+                path.join(emailed_path_dir, path.basename(file_path)),
+            )
 
     print("Exiting...")
     sys.exit()

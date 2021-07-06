@@ -5,9 +5,9 @@ from pykindler.utils.bash_utils import (
     check_commandline_args,
     process_commandline_args,
 )
-from pykindler.utils.cron_utils import setup_cron_job
-from pykindler.utils.email_utils import *
-from pykindler.convertor import process_and_convert_books
+from .utils.cron_utils import setup_cron_job
+from .utils.email_utils import *
+from .convertor import process_and_convert_books
 from os import path
 
 

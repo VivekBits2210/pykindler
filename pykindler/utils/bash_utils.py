@@ -1,11 +1,16 @@
 from os import path, listdir
-from ..constants import argument_dict
 
 
 def construct_parser():
     from argparse import ArgumentParser
+    from ..constants import argument_dict
 
     parser = ArgumentParser()
+    parser = load_arguments(parser, argument_dict)
+    return parser
+
+
+def load_arguments(parser, argument_dict):
     for argument, info in argument_dict.items():
         help = info[0]
         action = info[1] if len(info) > 1 else None
@@ -13,6 +18,7 @@ def construct_parser():
             parser.add_argument("--" + argument, help=help)
         else:
             parser.add_argument("--" + argument, help=help, action=action)
+    return parser
 
 
 def get_commandline_args(args):

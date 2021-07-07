@@ -21,6 +21,8 @@ Know your Kindle's e-mail address [here](https://www.amazon.com/gp/sendtokindle/
 ## Dependencies
 - UNIX based system needed (Linux, MacOS)
 - Calibre
+
+## What packages are used under the hood?
 - [pyenchant - Offers an English Dictionary, helpful in detecting if a file is a book](https://pypi.org/project/pyenchant/)
 - [python-crontab - Allows scheduling of pykindler jobs that auto-convert and email your books in the background](https://pypi.org/project/python-crontab/)
 - [pgi - Auto-detects your downloads folder](https://pypi.org/project/pgi/)

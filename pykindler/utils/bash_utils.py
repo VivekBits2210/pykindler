@@ -1,44 +1,22 @@
 from os import path, listdir
+from ..constants import argument_dict
 
 
-def get_commandline_args(args):
+def construct_parser():
     from argparse import ArgumentParser
 
     parser = ArgumentParser()
-    parser.add_argument(
-        "--folder",
-        help="folder to run conversion on (defaults to downloads if not specified)",
-    )
-    parser.add_argument(
-        "--file",
-        help="absolute file path for conversion, if you want a single file converted",
-    )
-    parser.add_argument(
-        "--kindle",
-        help="your Kindle email-id, books are auto-emailed to here after conversion",
-    )
-    parser.add_argument(
-        "--email",
-        help="your personal email-id, books are auto-emailed from here after conversion (use with --kindle for the first ever run, to store credentials)",
-    )
-    parser.add_argument(
-        "--ext", help="extension to convert to (defaults to mobi if not specified)"
-    )
-    parser.add_argument(
-        "--job",
-        help="sets up a twice-a-day conversion job for specified folder (or downloads)",
-        action="store_true",
-    )
-    parser.add_argument(
-        "--force",
-        help="Convert without checking if it is a book or within safe size threshold (only extension check is performed)",
-        action="store_true",
-    )
-    parser.add_argument(
-        "--askcred",
-        help="Re-enter your email password, override the stored one",
-        action="store_true",
-    )
+    for argument, info in argument_dict.items():
+        help = info[0]
+        action = info[1] if len(info) > 1 else None
+        if action is None:
+            parser.add_argument("--" + argument, help=help)
+        else:
+            parser.add_argument("--" + argument, help=help, action=action)
+
+
+def get_commandline_args(args):
+    parser = construct_parser()
     args = parser.parse_args(args)
     return args
 

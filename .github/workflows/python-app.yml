@@ -39,6 +39,6 @@ jobs:
         git push
     - name: Test with unittest
       run: |
-        python -m unittest discover -s ./pykindler/tests
+        python -m unittest discover -s ./pykindler/tests -v
     - name: Code Coverage Report
       uses: romeovs/lcov-reporter-action@v0.2.11

@@ -34,14 +34,13 @@ def client():
         print("Error: To auto-email, please provide both --email and --kindle")
         sys.exit(2)
 
-    try:
-        session_object = (
-            GmailSession(args.email, args.askcred) if args.email is not None else None
-        )
-        print("Credentials are valid! Books will be e-mailed after conversion...\n")
-    except OSError:
-        print("Error: Please enter valid e-mail credentials!")
-        sys.exit(2)
+    if args.email is not None:
+        try:
+            session_object = GmailSession(args.email, args.askcred)
+            print("Credentials are valid! Books will be e-mailed after conversion...\n")
+        except OSError:
+            print("Error: Please enter valid e-mail credentials!")
+            sys.exit(2)
 
     converted_file_list = process_and_convert_books(file_list, download_dir, args)
     if args.email is not None:

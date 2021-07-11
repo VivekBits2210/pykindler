@@ -1,7 +1,7 @@
+import enchant
+
 # Check if word is english
 def is_word_english(word):
-    import enchant
-
     return enchant.Dict("en_US").check(word)
 
 

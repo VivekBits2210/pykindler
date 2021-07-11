@@ -7,7 +7,8 @@ def is_word_english(word):
 
 # Check if token is helpful to find metadatas
 def is_token_good(token):
-    bad_tokens = ["ltd", "libgen", "org", "www", "com", "co"]
+    from ..constants import bad_tokens
+
     if len(token) <= 3 and not is_word_english(token):
         return False
     if len(token) <= 1:

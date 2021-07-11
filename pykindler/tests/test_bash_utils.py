@@ -1,11 +1,9 @@
+import random, math
+from itertools import chain
 from unittest import TestCase, mock
-from unittest.case import skip
+from argparse import ArgumentParser
 from pykindler.utils import bash_utils
 from pykindler.constants import argument_dict, valid_extensions_for_conversion
-from argparse import ArgumentError, ArgumentParser
-import random
-import math
-from itertools import chain
 
 
 class TestBashUtils(TestCase):
@@ -74,3 +72,40 @@ class TestBashUtils(TestCase):
                 self.assertEqual(output, None)
             else:
                 self.assertIn("Error", output)
+
+    @mock.patch("pykindler.utils.bash_utils.listdir", return_value=["f1", "f2", "f3"])
+    def test_process_commandline_args(self, mock1):
+        arg_dict = {
+            (None, None, None): (None, None),
+            ("/path/some_file", "/path/some_folder", None): (
+                ["some_file"],
+                "/path",
+            ),
+            ("/path/some_file", "/path/some_folder", "/path/to/downloads"): (
+                ["some_file"],
+                "/path",
+            ),
+            ("/path/some_file", "/path/some_folder", "/path/to/downloads"): (
+                ["some_file"],
+                "/path",
+            ),
+            (None, "/path/some_folder", "/path/to/downloads"): (
+                ["f1", "f2", "f3"],
+                "/path/some_folder",
+            ),
+            (None, None, "/path/to/downloads"): (
+                ["f1", "f2", "f3"],
+                "/path/to/downloads",
+            ),
+        }
+
+        for arg_tuple in arg_dict:
+            args = mock.MagicMock()
+            args.file = arg_tuple[0]
+            args.folder = arg_tuple[1]
+            with mock.patch(
+                "pykindler.utils.bash_utils.get_downloads_folder_location",
+                return_value=arg_tuple[2],
+            ):
+                output = bash_utils.process_commandline_args(args)
+                self.assertTupleEqual(arg_dict[arg_tuple], output)

@@ -1,4 +1,5 @@
 from os import path, listdir
+from .os_utils import get_downloads_folder_location
 
 
 def construct_parser():
@@ -58,8 +59,6 @@ def check_commandline_args(args):
 
 
 def process_commandline_args(args):
-    from .os_utils import get_downloads_folder_location
-
     if args.file is not None:
         file_list = [path.basename(args.file)]
         download_dir = path.split(args.file)[0]

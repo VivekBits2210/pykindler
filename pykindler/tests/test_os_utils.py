@@ -17,16 +17,18 @@ class TestOsUtils(TestCase):
         self.assertEqual(True, True)
 
     def test_name_required_inodes(self):
+        from pykindler.constants import file_appended_hash
+
         arg_dict = {
             "some_folder_name": (
-                "some_folder_name/not_books_30234f2413d43e5c.txt",
-                "some_folder_name/Processed_Books_30234f2413d43e5c",
-                "some_folder_name/Converted_Books_30234f2413d43e5c",
+                f"some_folder_name/not_books_{file_appended_hash}.txt",
+                f"some_folder_name/Processed_Books_{file_appended_hash}",
+                f"some_folder_name/Converted_Books_{file_appended_hash}",
             ),
             "some_other_folder_name": (
-                "some_other_folder_name/not_books_30234f2413d43e5c.txt",
-                "some_other_folder_name/Processed_Books_30234f2413d43e5c",
-                "some_other_folder_name/Converted_Books_30234f2413d43e5c",
+                f"some_other_folder_name/not_books_{file_appended_hash}.txt",
+                f"some_other_folder_name/Processed_Books_{file_appended_hash}",
+                f"some_other_folder_name/Converted_Books_{file_appended_hash}",
             ),
         }
 

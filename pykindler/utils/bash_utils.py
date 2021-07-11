@@ -3,10 +3,8 @@ from os import path, listdir
 
 def construct_parser():
     from argparse import ArgumentParser
-    from ..constants import argument_dict
 
     parser = ArgumentParser()
-    parser = load_arguments(parser, argument_dict)
     return parser
 
 
@@ -22,7 +20,10 @@ def load_arguments(parser, argument_dict):
 
 
 def get_commandline_args(args):
+    from ..constants import argument_dict
+
     parser = construct_parser()
+    parser = load_arguments(parser, argument_dict)
     args = parser.parse_args(args)
     return args
 

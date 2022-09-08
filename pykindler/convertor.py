@@ -23,7 +23,7 @@ def process_and_convert_books(file_list, folder, args):
     for filename in file_list:
         absolute_file_path = path.join(folder, filename)
 
-        if args.force and True in set(
+        if args.force and any(
             filename.endswith(extension) for extension in extension_list
         ):
             converted_file_path = trigger_conversion(
@@ -55,7 +55,7 @@ def process_and_convert_books(file_list, folder, args):
             )
             continue
 
-        if True in set(filename.endswith(extension) for extension in extension_list):
+        if any(filename.endswith(extension) for extension in extension_list):
             print(f"Looking at: {filename}")
             cleaned_file_name, ext = clean_file_name(filename)
 

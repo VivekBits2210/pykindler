@@ -1,7 +1,7 @@
 black==21.6b0
 cffi==1.14.5
 click==8.0.1
-cryptography==3.4.7
+cryptography==39.0.1
 importlib-metadata==4.6.1
 jeepney==0.6.0
 keyring==23.0.1
